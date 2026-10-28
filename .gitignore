@@ -1,0 +1,14 @@
+# Gowin build outputs and the IDE's per-user project state
+impl/build.log
+impl/gwsynthesis
+impl/pnr
+impl/temp
+*.gprj.user
+
+# Built programs and tools
+firmware/firmware.*
+sim/ufm_init.hex
+sim/fw/ufm_init.hex
+tools/sdput/build
+tools/usbdiag/build
+__pycache__

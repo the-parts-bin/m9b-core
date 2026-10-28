@@ -1,0 +1,16 @@
+boot_ram_init.vh
+firmware.hex
+firmware_hi.hex
+firmware_lo.hex
+*.fst
+fw/boot_ram_init.vh
+fw/firmware.bin
+fw/firmware.elf
+fw/firmware.hex
+soc.fst
+soc.vvp
+*.vcd
+video.vvp
+vram_init?.hex
+*.vvp
+fw_sd/build/

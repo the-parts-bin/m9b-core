@@ -1,0 +1,236 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1090 680" width="1090" height="680" role="img" aria-labelledby="sys-t">
+  <title id="sys-t">m9b system diagram by clock domain</title>
+  <style>
+    svg {
+      --bg: #fbfaf7; --fg: #1b1d22; --fg2: #4a4f5a; --muted: #7a7f8a;
+      --c-cpu: #2f62b0; --c-sys: #2b8a4e; --c-pix: #7048b8; --c-usb: #b07a12; --c-ram: #c99a06; --c-ext: #a8452a;
+      --fill-cpu: #e8effa; --fill-sys: #e6f4eb; --fill-pix: #efe9f9; --fill-usb: #f8f0dd; --fill-ram: #fff3c4;
+      --fill-ext: #f9e6df; --fill-box: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --bg: #15171b; --fg: #e7e5e0; --fg2: #b4b6bd; --muted: #868a94;
+        --c-cpu: #7aa5ea; --c-sys: #6cc791; --c-pix: #ad8cf0; --c-usb: #e2b04c; --c-ram: #e8c342; --c-ext: #e8896a;
+        --fill-cpu: #1c2738; --fill-sys: #1a2c22; --fill-pix: #251f36; --fill-usb: #2e2616; --fill-ram: #332c12;
+        --fill-ext: #33201a; --fill-box: #1b1e24;
+      }
+    }
+    .bg { fill: var(--bg); }
+    text { font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--fg); }
+    .t-title { font-weight: 600; font-size: 14px; }
+    .t-sub { font-size: 11.5px; fill: var(--fg2); }
+    .t-small { font-size: 10.5px; fill: var(--muted); }
+    .t-freq { font-family: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace; font-weight: 600; font-size: 12px; }
+    .box { fill: var(--fill-box); stroke: var(--fg2); stroke-width: 1.2; }
+    .ram { fill: var(--fill-ram); stroke: var(--c-ram); stroke-width: 1.2; }
+    .ext { fill: var(--fill-ext); stroke: var(--c-ext); stroke-width: 1.2; }
+    .wire { stroke: var(--fg2); stroke-width: 1.6; fill: none; }
+    .arrowhead { fill: var(--fg2); }
+    .dom { stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .d-cpu { fill: var(--fill-cpu); stroke: var(--c-cpu); }
+    .d-sys { fill: var(--fill-sys); stroke: var(--c-sys); }
+    .d-pix { fill: var(--fill-pix); stroke: var(--c-pix); }
+    .d-usb { fill: var(--fill-usb); stroke: var(--c-usb); }
+    .k-cpu { fill: var(--c-cpu); }
+    .k-sys { fill: var(--c-sys); }
+    .k-pix { fill: var(--c-pix); }
+    .k-usb { fill: var(--c-usb); }
+    .die-ram { fill: var(--fill-ram); stroke: var(--c-ram); stroke-width: 1.4; }
+  </style>
+  <rect class="bg" x="0" y="0" width="1090" height="680" />
+  <defs>
+    <marker id="sys-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+      orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrowhead" />
+    </marker>
+  </defs>
+
+  <!-- clock domains -->
+  <g>
+    <rect x="130" y="20" width="420" height="380" rx="14" class="dom d-cpu" />
+    <text x="146" y="44" class="t-freq k-cpu">cpu_clk · 36 MHz</text>
+  </g>
+  <g>
+    <rect x="570" y="20" width="200" height="380" rx="14" class="dom d-sys" />
+    <text x="586" y="44" class="t-freq k-sys">system_clk · 72 MHz</text>
+  </g>
+  <g>
+    <rect x="779" y="20" width="97" height="180" rx="14" class="dom d-sys" />
+    <text x="827" y="40" text-anchor="middle" class="t-freq k-sys">memory_clk</text>
+    <text x="827" y="56" text-anchor="middle" class="t-freq k-sys">144 MHz</text>
+  </g>
+  <g>
+    <rect x="570" y="420" width="280" height="250" rx="14" class="dom d-pix" />
+    <text x="586" y="456" class="t-freq k-pix">pixel_clk · 27 MHz</text>
+  </g>
+  <g>
+    <rect x="380" y="420" width="170" height="180" rx="14" class="dom d-usb" />
+    <text x="396" y="444" class="t-freq k-usb">usb_clk · 12 MHz</text>
+  </g>
+
+  <!-- CPU domain -->
+  <g>
+    <rect x="150" y="55" width="380" height="64" rx="6" class="box" />
+    <text x="162" y="78" class="t-title">VexiiRiscv CPU</text>
+    <text x="162" y="97" class="t-sub">RV32IM + Zba, Zicbom, Zicbop, Zicboz · in order</text>
+    <text x="162" y="112" class="t-sub">branch predictor, radix-4 divider, 24-bit addresses</text>
+
+    <rect x="150" y="132" width="185" height="56" rx="4" class="ram" />
+    <text x="160" y="153" class="t-title">Fetch L1 · 8 KB</text>
+    <text x="160" y="172" class="t-sub">direct-mapped, 64 B lines</text>
+    <rect x="345" y="132" width="185" height="56" rx="4" class="ram" />
+    <text x="355" y="153" class="t-title">Data L1 · 16 KB</text>
+    <text x="355" y="172" class="t-sub">2-way, write-back</text>
+
+    <rect x="150" y="200" width="380" height="22" rx="3" class="box" />
+    <text x="340" y="215" text-anchor="middle" class="t-small" style="fill: var(--fg2)">L1 bus · 64-bit, whole
+      64-byte lines</text>
+
+    <rect x="150" y="234" width="185" height="50" rx="4" class="box" />
+    <text x="160" y="255" class="t-title">User flash · 76 KB</text>
+    <text x="160" y="273" class="t-sub">firmware runs in place</text>
+    <text x="355" y="255" class="t-small">interrupts: vertical blank,</text>
+    <text x="355" y="270" class="t-small">audio half done, USB report</text>
+
+    <rect x="150" y="300" width="380" height="22" rx="3" class="box" />
+    <text x="340" y="315" text-anchor="middle" class="t-small" style="fill: var(--fg2)">I/O bus · 32-bit,
+      uncached</text>
+
+    <rect x="150" y="335" width="118" height="50" rx="4" class="box" />
+    <text x="160" y="356" class="t-title">UART</text>
+    <text x="160" y="373" class="t-sub">loader, console</text>
+    <rect x="281" y="335" width="118" height="50" rx="4" class="box" />
+    <text x="291" y="356" class="t-title">SPI</text>
+    <text x="291" y="373" class="t-sub">to 36 MHz</text>
+    <rect x="412" y="335" width="118" height="50" rx="4" class="box" />
+    <text x="422" y="356" class="t-title">USB registers</text>
+    <text x="422" y="373" class="t-sub">× 2 ports</text>
+  </g>
+  <g class="wire">
+    <line x1="242" y1="119" x2="242" y2="132" />
+    <line x1="437" y1="119" x2="437" y2="132" />
+    <line x1="242" y1="188" x2="242" y2="200" />
+    <line x1="437" y1="188" x2="437" y2="200" />
+    <line x1="242" y1="222" x2="242" y2="234" />
+    <polyline points="150,87 140,87 140,311 150,311" />
+    <line x1="209" y1="322" x2="209" y2="335" />
+    <line x1="340" y1="322" x2="340" y2="335" />
+    <line x1="471" y1="322" x2="471" y2="335" />
+  </g>
+
+  <!-- system / memory domain -->
+  <g>
+    <rect x="585" y="58" width="170" height="122" rx="6" class="box" />
+    <text x="597" y="81" class="t-title">PSRAM controller</text>
+    <text x="597" y="101" class="t-sub">both dies in lockstep,</text>
+    <text x="597" y="116" class="t-sub">64 bits per 72 MHz cycle</text>
+    <text x="597" y="136" class="t-sub">cache lines first,</text>
+    <text x="597" y="151" class="t-sub">DMA in between</text>
+    <rect x="795" y="68" width="65" height="112" rx="6" class="box" />
+    <text x="827" y="104" text-anchor="middle" class="t-title">PHY</text>
+    <text x="827" y="123" text-anchor="middle" class="t-small">DDR</text>
+    <text x="827" y="140" text-anchor="middle" class="t-small">OSER4</text>
+    <text x="827" y="154" text-anchor="middle" class="t-small">IDES4</text>
+
+    <rect x="585" y="196" width="140" height="60" rx="6" class="box" />
+    <text x="597" y="218" class="t-title">Bridge</text>
+    <text x="597" y="236" class="t-sub">64-byte line</text>
+    <text x="597" y="250" class="t-sub">buffers</text>
+  </g>
+  <g class="wire">
+    <line x1="755" y1="119" x2="795" y2="119" />
+    <line x1="655" y1="180" x2="655" y2="196" />
+    <line x1="530" y1="211" x2="585" y2="211" marker-end="url(#sys-ah)" marker-start="url(#sys-ah)" />
+    <line x1="740" y1="180" x2="740" y2="372" marker-end="url(#sys-ah)" />
+  </g>
+  <text x="560" y="196" text-anchor="middle" class="t-small">misses</text>
+  <text x="747" y="300" class="t-small">DMA</text>
+
+  <!-- the transfer RAM straddles 72 / 27 MHz -->
+  <g>
+    <rect x="585" y="372" width="180" height="62" rx="4" class="ram" />
+    <text x="597" y="394" class="t-title">Transfer RAM · 8 KB</text>
+    <text x="597" y="412" class="t-sub">line buffers, audio halves</text>
+    <text x="597" y="426" class="t-small">written at 72, read at 27 MHz</text>
+  </g>
+
+  <!-- pixel domain -->
+  <g>
+    <rect x="590" y="475" width="240" height="62" rx="6" class="box" />
+    <text x="602" y="497" class="t-title">Video engine</text>
+    <text x="602" y="515" class="t-sub">line table · 16 bpp, 8 bpp, 2×</text>
+    <text x="602" y="530" class="t-sub">audio playback, IRQ events</text>
+    <rect x="590" y="550" width="140" height="48" rx="4" class="ram" />
+    <text x="600" y="570" class="t-title">Video RAM</text>
+    <text x="600" y="587" class="t-sub">palette, line table</text>
+    <rect x="590" y="612" width="240" height="46" rx="6" class="box" />
+    <text x="602" y="632" class="t-title">HDMI encoder</text>
+    <text x="602" y="649" class="t-sub">TMDS + data islands (audio)</text>
+  </g>
+  <g class="wire">
+    <line x1="710" y1="434" x2="710" y2="475" />
+    <line x1="660" y1="537" x2="660" y2="550" />
+    <line x1="780" y1="537" x2="780" y2="612" />
+    <polyline points="530,311 560,311 560,574 590,574" marker-end="url(#sys-ah)" />
+  </g>
+
+  <!-- USB domain -->
+  <g>
+    <rect x="395" y="455" width="140" height="70" rx="6" class="box" />
+    <text x="405" y="476" class="t-title">USB host engine</text>
+    <text x="405" y="494" class="t-sub">one microcoded core</text>
+    <text x="405" y="509" class="t-sub">for both ports</text>
+    <rect x="395" y="536" width="140" height="26" rx="4" class="ram" />
+    <text x="405" y="553" class="t-small" style="fill: var(--fg)">microcode ROM</text>
+  </g>
+  <g class="wire">
+    <line x1="471" y1="385" x2="471" y2="455" />
+    <line x1="465" y1="525" x2="465" y2="536" />
+  </g>
+
+  <!-- in the package -->
+  <g>
+    <rect x="890" y="58" width="185" height="96" rx="4" class="die-ram" />
+    <text x="905" y="82" class="t-title">PSRAM die 0 · 4 MB</text>
+    <text x="905" y="101" class="t-sub">8-bit DDR at 144 MHz</text>
+    <rect x="890" y="174" width="185" height="96" rx="4" class="die-ram" />
+    <text x="905" y="198" class="t-title">PSRAM die 1 · 4 MB</text>
+    <text x="905" y="217" class="t-sub">8-bit DDR at 144 MHz</text>
+    <text x="982" y="290" text-anchor="middle" class="t-small">same package, separate dies</text>
+  </g>
+  <g class="wire">
+    <line x1="860" y1="100" x2="890" y2="100" />
+    <polyline points="860,160 875,160 875,220 890,220" />
+  </g>
+
+  <!-- serializers + on the board -->
+  <g>
+    <rect x="880" y="560" width="195" height="110" rx="14" class="dom d-pix" />
+    <text x="894" y="584" class="t-freq k-pix">hdmi_bit_clk · 135 MHz</text>
+    <rect x="895" y="598" width="165" height="54" rx="6" class="box" />
+    <text x="907" y="620" class="t-title">Serializers</text>
+    <text x="907" y="639" class="t-sub">OSER10, 10:1, DDR</text>
+  </g>
+  <rect x="890" y="490" width="185" height="44" rx="6" class="ext" />
+  <text x="902" y="517" class="t-title">HDMI out</text>
+  <rect x="10" y="335" width="100" height="50" rx="6" class="ext" />
+  <text x="20" y="356" class="t-title">Serial</text>
+  <text x="20" y="373" class="t-small">USB or J5</text>
+  <rect x="150" y="440" width="105" height="44" rx="6" class="ext" />
+  <text x="160" y="467" class="t-title">SD card</text>
+  <rect x="265" y="440" width="105" height="44" rx="6" class="ext" />
+  <text x="275" y="460" class="t-title">SPI flash</text>
+  <text x="275" y="476" class="t-small">4 MB</text>
+  <rect x="10" y="478" width="100" height="44" rx="6" class="ext" />
+  <text x="20" y="497" class="t-title">2 × USB-A</text>
+  <text x="20" y="512" class="t-small">keyboard, mouse</text>
+  <g class="wire">
+    <line x1="830" y1="635" x2="895" y2="635" />
+    <line x1="977" y1="598" x2="977" y2="534" />
+    <line x1="150" y1="360" x2="110" y2="360" />
+    <polyline points="340,385 340,412" />
+    <polyline points="202,440 202,412 340,412" />
+    <line x1="317" y1="412" x2="317" y2="440" />
+    <polyline points="395,500 110,500" />
+  </g>
+</svg>

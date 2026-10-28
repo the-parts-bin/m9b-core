@@ -1,0 +1,50 @@
+[dumpfile] "hyperram.fst"
+[savefile] "hyperram.gtkw"
+[timestart] 1159000
+[size] 1600 900
+[pos] -1 -1
+@200
+-Clocks
+@28
+tb.memory_clk
+tb.system_clk
+@200
+-PSRAM pins
+@28
+tb.psram_cs_n[1:0]
+tb.psram_ck[1:0]
+tb.psram_ck_n[1:0]
+tb.psram_rwds[1:0]
+@22
+tb.psram_dq[15:0]
+@200
+-Controller sequencer
+@24
+tb.dut.phase[5:0]
+@22
+tb.dut.dq_out[63:0]
+@28
+tb.dut.dq_oe_n[1:0]
+tb.dut.rwds_oe_n
+@200
+-Read capture (after IODELAY, IDES4 outputs)
+@22
+tb.dut.dq_in_ser_d[7:0]
+@28
+tb.dut.rwds_in_ser_d
+@22
+tb.dut.rwds_in[7:0]
+tb.dut.dq_in[63:0]
+tb.dut.dq_in_d[63:0]
+tb.dut.vr_write_data[63:0]
+@28
+tb.dut.vr_write
+@22
+tb.dut.vr_addr[9:0]
+@200
+-PSRAM model
+@24
+tb.psram.edge_n
+@28
+tb.psram.dq_oe
+tb.psram.rwds_oe
